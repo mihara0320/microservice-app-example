@@ -7,5 +7,11 @@ metadata:
 spec:
   ports:
   - port: 8082
+    protocol: TCP
+    targetPort: 8082
   selector:
     service: todos-api
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

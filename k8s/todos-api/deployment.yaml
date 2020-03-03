@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
@@ -6,6 +6,15 @@ metadata:
   name: todos-api
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: microservice-app-example
+      service: todos-api
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -26,10 +35,18 @@ spec:
           value: log_channel
         - name: ZIPKIN_URL
           value: http://zipkin:9411/api/v2/spans
-          
         image: todos-api
+        imagePullPolicy: Never
         name: todos-api
         ports:
         - containerPort: 8082
-        imagePullPolicy: Never
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
       restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status: {}
