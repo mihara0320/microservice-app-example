@@ -1,14 +1,11 @@
 'use strict';
 const cache = require('memory-cache');
-const {Annotation, 
-    jsonEncoder: {JSON_V2}} = require('zipkin');
 
 const OPERATION_CREATE = 'CREATE',
       OPERATION_DELETE = 'DELETE';
 
 class TodoController {
-    constructor({tracer, redisClient, logChannel}) {
-        this._tracer = tracer;
+    constructor({redisClient, logChannel}) {
         this._redisClient = redisClient;
         this._logChannel = logChannel;
     }
@@ -51,15 +48,11 @@ class TodoController {
     }
 
     _logOperation (opName, username, todoId) {
-        this._tracer.scoped(() => {
-            const traceId = this._tracer.id;
-            this._redisClient.publish(this._logChannel, JSON.stringify({
-                zipkinSpan: traceId,
-                opName: opName,
-                username: username,
-                todoId: todoId,
-            }))
-        })
+        this._redisClient.publish(this._logChannel, JSON.stringify({
+            opName: opName,
+            username: username,
+            todoId: todoId,
+        }))
     }
 
     _getTodoData (userID) {

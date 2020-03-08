@@ -23,15 +23,6 @@ spec:
   gateways:
   - todo-app-gateway
   http:
-  - name: "zipkin" 
-    match:
-    - uri:
-        prefix: /zipkin
-    route:
-    - destination:
-        host: zipkin
-        port:
-          number: 9411
   - name: "frontend" 
     route:
     - destination:

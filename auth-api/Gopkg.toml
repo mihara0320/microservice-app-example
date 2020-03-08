@@ -28,7 +28,3 @@
 [[constraint]]
   name = "github.com/labstack/echo"
   version = "3.2.2"
-
-[[constraint]]
-  branch = "master"
-  name = "github.com/openzipkin/zipkin-go"

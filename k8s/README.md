@@ -24,8 +24,3 @@ You can now access the frontend service on your browser like this:
 ```shell
 $ minikube service frontend
 ```
-
-To access Zipkin UI you can use this command:
-```shell
-$ minikube service zipkin
-```
