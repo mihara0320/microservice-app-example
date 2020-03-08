@@ -12,6 +12,3 @@ spec:
   selector:
     service: redis-queue
   sessionAffinity: None
-  type: ClusterIP
-status:
-  loadBalancer: {}
