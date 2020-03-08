@@ -5,14 +5,9 @@ metadata:
     app: microservice-app-example
   name: frontend
 spec:
-  externalTrafficPolicy: Cluster
   ports:
   - port: 8080
     protocol: TCP
     targetPort: 8080
   selector:
     service: frontend
-  sessionAffinity: None
-  type: LoadBalancer
-status:
-  loadBalancer: {}

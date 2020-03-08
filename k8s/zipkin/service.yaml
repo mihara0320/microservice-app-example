@@ -3,16 +3,12 @@ kind: Service
 metadata:
   labels:
     app: microservice-app-example
-  name: zipkin
+  name: zipkin-original
 spec:
-  externalTrafficPolicy: Cluster
   ports:
   - port: 9411
     protocol: TCP
     targetPort: 9411
   selector:
-    service: zipkin
+    service: zipkin-original
   sessionAffinity: None
-  type: LoadBalancer
-status:
-  loadBalancer: {}

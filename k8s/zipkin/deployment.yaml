@@ -3,28 +3,23 @@ kind: Deployment
 metadata:
   labels:
     app: microservice-app-example
-  name: zipkin
+  name: zipkin-original
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: microservice-app-example
-      service: zipkin
-  strategy:
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 1
-    type: RollingUpdate
+      service: zipkin-original
   template:
     metadata:
       labels:
         app: microservice-app-example
-        service: zipkin
+        service: zipkin-original
     spec:
       containers:
       - image: openzipkin/zipkin
         imagePullPolicy: Always
-        name: zipkin
+        name: zipkin-original
         ports:
         - containerPort: 9411
           protocol: TCP
@@ -33,9 +28,4 @@ spec:
         resources: {}
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
-      dnsPolicy: ClusterFirst
       restartPolicy: Always
-      schedulerName: default-scheduler
-      securityContext: {}
-      terminationGracePeriodSeconds: 30
-status: {}

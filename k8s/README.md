@@ -29,5 +29,3 @@ To access Zipkin UI you can use this command:
 ```shell
 $ minikube service zipkin
 ```
-
-//docker-compose build
