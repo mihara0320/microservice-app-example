@@ -1,0 +1,1 @@
+make each service internal access only by ClusterIP
